@@ -65,11 +65,61 @@ mysql> desc employ;
 +----------+--------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
 
+5.create an invoice database and having following tables?
 
-//
+mysql> create table invoice_master(inv_id int primary key,cust_id int,inv_date date,foreign key(cust_id) references customer(id));
+Query OK, 0 rows affected (1.56 sec)
 
+mysql>  desc invoice_master;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| inv_id   | int  | NO   | PRI | NULL    |       |
+| cust_id  | int  | YES  | MUL | NULL    |       |
+| inv_date | date | YES  |     | NULL    |       |
++----------+------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
 
+mysql> create table invoice_item(inv_id int,pid int,quantity int,foreign key(inv_id) references invoice_master(inv_id),foreign key(pid) references product(p_id));
+Query OK, 0 rows affected (0.89 sec)
 
+mysql>  desc invoice_item;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| inv_id   | int  | YES  | MUL | NULL    |       |
+| pid      | int  | YES  | MUL | NULL    |       |
+| quantity | int  | YES  |     | NULL    |       |
++----------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table customers(id int primary key,name varchar(20),address varchar(50),city varchar(30),ph_no varchar(15));
+Query OK, 0 rows affected (0.69 sec)
+
+mysql> desc customers;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
+| city    | varchar(30) | YES  |     | NULL    |       |
+| ph_no   | varchar(15) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> create table products(pid int primary key,pname varchar(50),price decimal(10,2)default '0');
+Query OK, 0 rows affected (1.41 sec)
+
+mysql> desc products;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| pid   | int           | NO   | PRI | NULL    |       |
+| pname | varchar(50)   | YES  |     | NULL    |       |
+| price | decimal(10,2) | YES  |     | 0.00    |       |
++-------+---------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
 
 
 
