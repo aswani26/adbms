@@ -1,0 +1,80 @@
+1.create a table EMPLOYEE have the following fields(emp_id,name,city,dob,adhar_no)?
+mysql> CREATE TABLE EMPLOYEE2(EMP_ID INT PRIMARY KEY,NAME VARCHAR(22),CITY VARCHAR(225),DOB DATE,ADHAR_NO INT);
+Query OK, 0 rows affected (1.11 sec)
+
+mysql> DESC EMPLOYEE2;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMP_ID   | int          | NO   | PRI | NULL    |       |
+| NAME     | varchar(22)  | YES  |     | NULL    |       |
+| CITY     | varchar(225) | YES  |     | NULL    |       |
+| DOB      | date         | YES  |     | NULL    |       |
+| ADHAR_NO | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+2.create a table student have the fields(roll_no ,name,age,addresss,gender)and add following constrains on it.
+mysql> create  table STUDENTSS(roll_no int primary key ,name varchar(15) not null,age int not null check(age between 0 and 99),address varchar(50),gender char default 'm');
+Query OK, 0 rows affected (1.50 sec)
+
+mysql> DESC STUDENTSS;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | NO   | PRI | NULL    |       |
+| name    | varchar(15) | NO   |     | NULL    |       |
+| age     | int         | NO   |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
+| gender  | char(1)     | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+3.create a temporary table student1 of student relation?
+mysql> create temporary table student1 select * from STUDENTSS;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student1;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | NO   |     | NULL    | NULL  |
+| name    | varchar(15) | NO   |     | NULL    | NULL  |
+| age     | int         | NO   |     | NULL    | NULL  |
+| address | varchar(50) | YES  |     | NULL    | NULL  |
+| gender  | char(1)     | YES  |     | m       | NULL  |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+4.create a duplicate table of EMPLOYEE?
+mysql> create table employ as select * from EMPLOYEE2;
+Query OK, 0 rows affected (1.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employ;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMP_ID   | int          | NO   |     | NULL    |       |
+| NAME     | varchar(22)  | YES  |     | NULL    |       |
+| CITY     | varchar(225) | YES  |     | NULL    |       |
+| DOB      | date         | YES  |     | NULL    |       |
+| ADHAR_NO | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
