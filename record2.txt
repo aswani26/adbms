@@ -1,0 +1,125 @@
+1.add a column 'SSN' at the first positin in the table EMPOLYEE?
+
+mysql> ALTER TABLE employ ADD SSN INT FIRST;
+Query OK, 0 rows affected (1.85 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employ;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| SSN      | int          | YES  |     | NULL    |       |
+| EMP_ID   | int          | NO   |     | NULL    |       |
+| NAME     | varchar(22)  | YES  |     | NULL    |       |
+| CITY     | varchar(225) | YES  |     | NULL    |       |
+| DOB      | date         | YES  |     | NULL    |       |
+| ADHAR_NO | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+2.change the data type of the column 'DOB'in year the table EMPLOYEE?
+
+mysql> alter table employ  modify DOB year;
+Query OK, 0 rows affected (2.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employ;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| SSN      | int          | YES  |     | NULL    |       |
+| NAME     | varchar(22)  | YES  |     | NULL    |       |
+| CITY     | varchar(225) | YES  |     | NULL    |       |
+| DOB      | year         | YES  |     | NULL    |       |
+| ADHAR_NO | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+3.delete the coloumn 'emp_id'the table EMPLOYEE?
+
+mysql> alter table employ drop EMP_ID;
+Query OK, 0 rows affected (1.65 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> desc employ;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| SSN      | int          | YES  |     | NULL    |       |
+| NAME     | varchar(22)  | YES  |     | NULL    |       |
+| CITY     | varchar(225) | YES  |     | NULL    |       |
+| DOB      | date         | YES  |     | NULL    |       |
+| ADHAR_NO | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+4.add the constraint unique for coloumns 'ssn,'adhar_no'the table EMPLOYEE?
+
+mysql> alter table employ add constraint c4 unique(SSN),add constraint c5 unique(ADHAR_NO);
+Query OK, 0 rows affected (1.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employ;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| SSN      | int          | YES  | UNI | NULL    |       |
+| NAME     | varchar(22)  | YES  |     | NULL    |       |
+| CITY     | varchar(225) | YES  |     | NULL    |       |
+| DOB      | year         | YES  |     | NULL    |       |
+| ADHAR_NO | int          | YES  | UNI | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+5.delete the null constraint of 'age' in the student table?
+
+mysql> alter table STUDENTSS modify age int;
+Query OK, 0 rows affected (1.71 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc STUDENTSS;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | NO   | PRI | NULL    |       |
+| name    | varchar(15) | NO   |     | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
+| gender  | char(1)     | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+6.change the table name employee as person?
+
+mysql> alter table employ rename to person;
+Query OK, 0 rows affected (0.56 sec)
+
+mysql> desc person;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| SSN      | int          | YES  | UNI | NULL    |       |
+| NAME     | varchar(22)  | YES  |     | NULL    |       |
+| CITY     | varchar(225) | YES  |     | NULL    |       |
+| DOB      | year         | YES  |     | NULL    |       |
+| ADHAR_NO | int          | YES  | UNI | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+7.delete the table student1?
+
+mysql> drop table person;
+Query OK, 0 rows affected (0.41 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
