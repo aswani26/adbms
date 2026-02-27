@@ -1,4 +1,6 @@
 
+
+
                  DML-INSERT
 
 1.INSERT VALUES IN EMPLOYEE TABLE
@@ -409,27 +411,25 @@ mysql> select*from invoice_item;
          
 1. Delete the record of customer id ‘1’. 
 
-mysql> DELETE FROM invoice_item WHERE inv_id IN(SELECT inv_id FROM invoice_master WHERE cust_id=1);
-Query OK, 3 rows affected (0.13 sec)
+mysql> delete from invoice_master where inv_id=2;
+Query OK, 0 rows affected (0.00 sec)
 
-mysql> DELETE FROM invoice_master WHERE cust_id =1;
-Query OK, 3 rows affected (0.10 sec)
-mysql> DELETE FROM customer WHERE id=1;
+mysql> delete from customer where id=2;
 Query OK, 1 row affected (0.12 sec)
+
 mysql> select*from customer;
-+----+--------+--------------+------------+------------+
-| id | name   | address      | city       | phone_no   |
-+----+--------+--------------+------------+------------+
-|  2 | SaNa   | KUNMKULAM    | TVM        | 7786676544 |
-|  3 | Manu   | THAMARAKULAM | CAICUT     | 9645357856 |
-|  4 | Aswani | MAYAND       | KANNUR     | 4545357856 |
-|  5 | Neira  | Muthalam     | KOLLAM0    | 4545357566 |
-|  6 | Neiira | Muthalami    | KOLLAM     | 4546357566 |
-|  7 | Neiioa | Manassery    | calicut    | 4846357566 |
-|  8 | Siinu  | OkVUNGARA    | malappuram | NULL       |
-|  9 | Skiinu | OkVUNGAR     | malappuram | NULL       |
-+----+--------+--------------+------------+------------+
-8 rows in set (0.00 sec)
++----+--------+--------------+---------+------------+
+| id | name   | address      | city    | phone_no   |
++----+--------+--------------+---------+------------+
+|  3 | Manu   | THAMARAKULAM | CAICUT  | 9645357856 |
+|  4 | Aswani | MAYAND       | KANNUR  | 4545357856 |
+|  5 | Neira  | Muthalam     | KOLLAM0 | 4545357566 |
+|  6 | Neiira | Muthalami    | KOLLAM  | 4546357566 |
+|  7 | Neiioa | Manassery    | calicut | 4846357566 |
++----+--------+--------------+---------+------------+
+5 rows in set (0.00 sec)
+
+
 
 
 2. Delete all purchase details of items its quantity less than 2.
@@ -452,8 +452,11 @@ mysql> select*from invoice_item;
 
  3. Delete the purchase details of product ‘table’ in the in_id ‘101’.
 
-mysql>  DELETE FROM invoice_item WHERE inv_id =101 AND pid=(SELECT pid FROM product WHERE p_name='table');
-Query OK, 1 row affected (0.09 sec)
+mysql> delete  from invoice_item where inv_id=101;
+Query OK, 0 rows affected (0.02 sec)
+mysql> delete from customer where id=5;
+Query OK, 1 row affected (0.10 sec)
+
 
 mysql> select*from invoice_item;
 +--------+------+----------+
@@ -469,28 +472,23 @@ mysql> select*from invoice_item;
 
 4. Delete details of customer who does not have phone number. 
 
-mysql> DELETE FROM invoice_item WHERE inv_id IN (SELECT inv_id FROM invoice_master WHERE cust_id IN ( SELECT cust_id FROM customer WHERE phone_no IS NULL));
-Query OK, 5 rows affected (0.10 sec)
+mysql> delete from invoice_master where inv_id=102;
+Query OK, 1 row affected (0.11 sec)
 
-
-mysql> DELETE FROM invoice_master WHERE cust_id IN ( SELECT cust_id FROM customer WHERE phone_no IS NULL);
-Query OK, 8 rows affected (0.12 sec)
-
-mysql>  DELETE FROM customer WHERE phone_no IS NULL;
-Query OK, 2 rows affected (0.11 sec)
+mysql> delete from customer where phone_no is null;
+Query OK, 0 rows affected (0.00 sec)
 
 mysql> select*from customer;
 +----+--------+--------------+---------+------------+
 | id | name   | address      | city    | phone_no   |
 +----+--------+--------------+---------+------------+
-|  2 | SaNa   | KUNMKULAM    | TVM     | 7786676544 |
 |  3 | Manu   | THAMARAKULAM | CAICUT  | 9645357856 |
 |  4 | Aswani | MAYAND       | KANNUR  | 4545357856 |
-|  5 | Neira  | Muthalam     | KOLLAM0 | 4545357566 |
 |  6 | Neiira | Muthalami    | KOLLAM  | 4546357566 |
 |  7 | Neiioa | Manassery    | calicut | 4846357566 |
 +----+--------+--------------+---------+------------+
-6 rows in set (0.00 sec)
+4 rows in set (0.00 sec)
+
 
 
 5. Delete all records from STUDENT table. 
@@ -502,8 +500,9 @@ mysql> select*from student;
 Empty set (0.00 sec)
 
 6. Delete Invoice details of a particular customer. 
- mysql> DELETE FROM invoice_item WHERE inv_id IN (SELECT inv_id FROM invoice_master WHERE cust_id = (SELECT cust_id FROM customer WHERE name = 'Manu'))
-;
+ mysql> DELETE FROM invoice_item WHERE inv_id=105;
+ 
+ mysql>DELETE FROM invoice_master WHERE inv_id=105;
 Query OK, 0 rows affected (0.00 sec)
 mysql> SELECT * FROM INVOICE_ITEM;
 +--------+------+----------+
@@ -550,6 +549,12 @@ mysql> SELECT * FROM invoice_item;
 |    101 |    1 |        7 |
 +--------+------+----------+
 5 rows in set (0.00 sec)
+
+
+
+
+
+
 
 
 
