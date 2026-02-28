@@ -1,0 +1,89 @@
+1. List all invoice items, avoid duplicates. 
+
+mysql> select*from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    103 |    1 |        5 |
+|    103 |    1 |        2 |
+|    103 |    6 |       10 |
+|    103 |    3 |        1 |
++--------+------+----------+
+4 rows in set (0.01 sec)
+mysql> select distinct inv_id from invoice_item;
++--------+
+| inv_id |
++--------+
+|    103 |
++--------+
+1 row in set (0.00 sec)
+
+
+2.List the customer details who not live in ‘tvm’
+
+mysql>  select*from customer ;
++----+--------+--------------+------------+------------+
+| id | name   | address      | city       | phone_no   |
++----+--------+--------------+------------+------------+
+|  1 | Sinu   | fjf          | Calicut    | 2344566667 |
+|  2 | Asha   | Tvm          | abc street | 9876543210 |
+|  3 | Manu   | THAMARAKULAM | CAICUT     | 9645357856 |
+|  4 | Aswani | MAYAND       | KANNUR     | 4545357856 |
+|  6 | Neiira | Muthalami    | KOLLAM     | 4546357566 |
+|  7 | Neiioa | Manassery    | calicut    | 4846357566 |
+| 12 | sinu   | fjf          | calicut    | 2344566667 |
+| 22 | Ravi   | MG Road      | Calicut    | 9876543210 |
++----+--------+--------------+------------+------------+
+8 rows in set (0.01 sec)
+
+mysql> select*from customer where city!='calicut';
++----+--------+--------------+------------+------------+
+| id | name   | address      | city       | phone_no   |
++----+--------+--------------+------------+------------+
+|  2 | Asha   | Tvm          | abc street | 9876543210 | 
+|  4 | Aswani | MAYAND       | KANNUR     | 4545357856 |
+|  6 | Neiira | Muthalami    | KOLLAM     | 4546357566 |
++----+--------+--------------+------------+------------+
+4 rows in set (0.00 sec)
+
+3. Display the customer details sorted in ascending by city and descending by names.
+
+mysql> select * from customer order by city asc,name desc;
++----+--------+--------------+------------+------------+
+| id | name   | address      | city       | phone_no   |
++----+--------+--------------+------------+------------+
+|  2 | Asha   | Tvm          | abc street | 9876543210 |
+|  3 | Manu   | THAMARAKULAM | CAICUT     | 9645357856 |
+|  1 | Sinu   | fjf          | Calicut    | 2344566667 |
+| 12 | sinu   | fjf          | calicut    | 2344566667 |
+| 22 | Ravi   | MG Road      | Calicut    | 9876543210 |
+|  7 | Neiioa | Manassery    | calicut    | 4846357566 |
+|  4 | Aswani | MAYAND       | KANNUR     | 4545357856 |
+|  6 | Neiira | Muthalami    | KOLLAM     | 4546357566 |
++----+--------+--------------+------------+------------+
+8 rows in set (0.00 sec)
+
+
+4. Find the customer names who have ‘e’ or ‘a’ in them and at least 3 characters in length.
+
+mysql> select name from customer where name like '%e%' or name like '%a%' and name like "___%";
++--------+
+| name   |
++--------+
+| Asha   |
+| Manu   |
+| Aswani |
+| Neiira |
+| Neiioa |
+| Ravi   |
++--------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
