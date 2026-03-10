@@ -1,0 +1,50 @@
+1. List the product name and quantity of invoice items. 
+
+mysql> SELECT product.p_name, invoice_item.quantity FROM product NATURAL JOIN invoice_item;
++--------+----------+
+| p_name | quantity |
++--------+----------+
+| soap   |        5 |
+| soap   |        2 |
+| pen    |       10 |
+| chair  |        1 |
+| chair  |        1 |
+| soap   |        1 |
+| cup    |        1 |
++--------+----------+
+7 rows in set (0.00 sec)
+
+2.display customer name ,product name,invoice date of purchased item'soap'
+
+
+mysql> SELECT customer.name, product.p_name, invoice_master.inv_date FROM customer JOIN invoice_master ON customer.id = invoice_master.cust_id JOIN invoice_item ON invoice_master.inv_id = invoice_item.inv_id JOIN product ON invoice_item.pid = product.p_id WHERE product.p_name='soap';
++--------+--------+------------+
+| name   | p_name | inv_date   |
++--------+--------+------------+
+| Aswani | soap   | 2025-06-27 |
+| Aswani | soap   | 2025-06-27 |
+| Aswani | soap   | 2025-06-27 |
++--------+--------+------------+
+3 rows in set (0.04 sec)
+
+
+3.display all customer details and invoice details must include customer has not purchased items
+
+
+mysql> select customer.name,customer.id,invoice_master.inv_id from customer left outer join invoice_master on customer.id=invoice_master.cust_id;
++--------+----+--------+
+| name   | id | inv_id |
++--------+----+--------+
+| Sinu   |  1 |    110 |
+| Asha   |  2 |    105 |
+| Manu   |  3 |   NULL |
+| Aswani |  4 |    102 |
+| Aswani |  4 |    103 |
+| Aswani |  4 |    108 |
+| Neiira |  6 |   NULL |
+| Neiioa |  7 |   NULL |
+| sinu   | 12 |   NULL |
+| Ravi   | 22 |    106 |
++--------+----+--------+
+10 rows in set (0.00 sec)
+
