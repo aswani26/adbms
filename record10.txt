@@ -1,0 +1,62 @@
+ 1.Create a procedure to find greatest of 3 numbers. 
+ 
+ mysql> create procedure grt3(a int, b int, c int)
+    -> begin
+    -> declare x,y,z int;
+    -> set x=a;
+    -> set y=b;
+    -> set z=c;
+    -> if x>y and x>z then
+    -> select x as 'greater';
+    -> elseif y>x and y>z then
+    -> select y as 'greater';
+    -> else
+    -> select z as 'greater';
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> call grt3(3,6,9)//
++---------+
+| greater |
++---------+
+|       9 |
++---------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+2.Create a procedure to display invoice details of a particular customer.
+
+mysql> CREATE PROCEDURE in_details(IN c_id INT) BEGIN SELECT customer.id, customer.name, invoice_master.inv_id, invoice_master.inv_date, invoice_item.pid, invoice_item.quantity FROM customer JOIN invoice_master ON customer.id = invoice_master.cust_id JOIN invoice_item ON invoice_master.inv_id = invoice_item.inv_id WHERE customer.id = c_id; END //
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> call in_details(2);//
+Empty set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call in_details(1);//
++----+------+--------+------------+------+----------+
+| id | name | inv_id | inv_date   | pid  | quantity |
++----+------+--------+------------+------+----------+
+|  1 | Sinu |    110 | 2025-09-25 |    3 |        1 |
+|  1 | Sinu |    110 | 2025-09-25 |    1 |        3 |
++----+------+--------+------------+------+----------+
+2 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
